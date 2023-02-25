@@ -1,0 +1,7 @@
+/build
+/dist
+/gui.ui
+/gui_preview.ui
+/main_gui.py
+/PuttyServerAdder.spec
+/setup.py
