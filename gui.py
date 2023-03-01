@@ -83,7 +83,7 @@ class Landscape(QtWidgets.QWidget):
             QtCore.QCoreApplication.translate("MainWin", "Preview:"))
 
 
-class Ui_MainWin(object):
+class Ui_Putty(object):
     def setupUi(self, MainWin: QtWidgets.QWidget):
         MainWin.setObjectName("MainWin")
         MainWin.setWindowModality(QtCore.Qt.ApplicationModal)
@@ -200,7 +200,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle('Fusion')
     MainWin = QtWidgets.QWidget()
-    ui = Ui_MainWin()
+    ui = Ui_Putty()
     ui.setupUi(MainWin)
     MainWin.show()
     sys.exit(app.exec_())

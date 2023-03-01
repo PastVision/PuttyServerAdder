@@ -2,10 +2,12 @@ from os import path
 from PyQt5 import QtCore, QtGui, QtWidgets
 from tkinter.filedialog import asksaveasfile, askopenfilename
 import json
+import sys
+from gui import Ui_Putty, Landscape, LandscapeTabs
 
 
 class ServerParser:
-    def __init__(self, filepath, key_format):
+    def __init__(self, filepath, key_format) -> None:
         self.filepath = filepath
         self._data = {}
         self.key_format = key_format
@@ -47,10 +49,20 @@ class ServerParser:
 class PuttyAdder:
     IP_EXP = r'^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$'
 
-    def __init__(self, error) -> None:
+    def __init__(self, error, MainWin) -> None:
         self.REGISTRY_CONTENT = str()
         self.error_callback = error
+        self.UI = Ui_Putty()
+        self.UI.setupUi(MainWin)
+        self.setup()
+        MainWin.show()
         print('PuttyServerAdder by ©Anurag :)\n')
+
+    def setup(self):
+        self.UI.addLandscapeBtn.connect(self.addLandscape)
+
+    def addLandscape(self):
+        pass
 
     def load_server_list(self) -> dict:
         f = askopenfilename(title='Open Server List', defaultextension='.txt')
@@ -332,6 +344,10 @@ def error_callback(err):
 
 
 if __name__ == '__main__':
-    adder = PuttyAdder(error=error_callback)
+    app = QtWidgets.QApplication(sys.argv)
+    app.setStyle('Fusion')
+    MainWin = QtWidgets.QWidget()
+    adder = PuttyAdder(error_callback, MainWin)
     adder.add(input('Username: '), input('KeyPath: '))
-    input('Done! :)\n\nPress any key to exit...')
+    sys.exit(app.exec_())
+    # input('Done! :)\n\nPress any key to exit...')
